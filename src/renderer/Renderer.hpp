@@ -1,8 +1,13 @@
 #pragma once
 #include "common.hpp"
 
+using render_callback = std::function<void()>;
+
 class Renderer final
 {
+	std::map<std::uint32_t, render_callback> m_render_callbacks;
+	bool m_running = false;
+
 public:
 	~Renderer() = default;
 	Renderer(const Renderer&) = delete;
@@ -14,11 +19,22 @@ public:
 	{
 		get()._destroy();
 	}
+	static void exit()
+	{
+		get().m_running = false;
+	}
 	static bool init()
 	{
 		return get()._init();
 	}
 
+	/**
+	 * @brief Add a callback for your ImGui rendering, additionally give a rendering priority, higher will means more on top rendered.
+	 */
+	static bool add_callback(render_callback&& callback, const std::uint32_t priority)
+	{
+		return get()._add_callback(std::move(callback), priority);
+	}
 	[[nodiscard]] static bool loop()
 	{
 		return get()._loop();
@@ -34,8 +50,9 @@ private:
 	}
 
 	void _destroy() const;
-	[[nodiscard]] bool _init() const;
+	[[nodiscard]] bool _init();
 
+	[[nodiscard]] bool _add_callback(render_callback&& callback, std::uint32_t priority);
 	[[nodiscard]] bool _loop() const;
 
 	void _begin_frame() const;

@@ -1,4 +1,6 @@
 #include "common.hpp"
+
+#include "gui/gui.hpp"
 #include "logger/Logger.hpp"
 #include "renderer/Backend.hpp"
 #include "renderer/Renderer.hpp"
@@ -15,6 +17,8 @@ int main()
 	Window::show_window();
 	if (!Renderer::init())
 		return 1;
+
+	Renderer::add_callback(gui::main_window, 9999);
 
 	while (Renderer::loop())
 	{

@@ -12,7 +12,7 @@ void Renderer::_destroy() const
 	ImGui::DestroyContext();
 }
 
-bool Renderer::_init() const
+bool Renderer::_init()
 {
 	Window::add_callback(ImGui_ImplWin32_WndProcHandler, "imgui_wndproc");
 
@@ -33,25 +33,33 @@ bool Renderer::_init() const
 		return false;
 	}
 
+	m_running = true;
 	LOG(G3LOG_DEBUG) << "ImGui initialized...";
 
 	return true;
 }
 
+bool Renderer::_add_callback(render_callback&& callback, const std::uint32_t priority)
+{
+	if (const auto result = m_render_callbacks.insert({ priority, callback }).second; !result)
+	{
+		LOG(WARNING) << "Duplicate rendering priority given.";
+
+		return false;
+	}
+	return true;
+}
+
 bool Renderer::_loop() const
 {
-	if (!_win_message())
+	if (!m_running || !_win_message())
 		return false;
 
 	_begin_frame();
-
-	ImGui::Begin("Hello");
-
-	if (ImGui::Button("Exit Program"))
-		return false;
-
-	ImGui::End();
-
+	for (const auto& callback : m_render_callbacks | std::views::values)
+	{
+		callback();
+	}
 	_end_frame();
 	return true;
 }
