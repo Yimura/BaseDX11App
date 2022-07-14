@@ -18,7 +18,7 @@ LRESULT Window::wnd_proc(HWND hwnd, std::uint32_t umsg, WPARAM wparam, LPARAM lp
 	{
 	case WM_SIZE:
 	{
-		if (wparam != SIZE_MINIMIZED)
+		if (Backend::swap_chain() != nullptr && wparam != SIZE_MINIMIZED)
 		{
 			Backend::cleanup_render_target();
 			Backend::swap_chain()->ResizeBuffers(
