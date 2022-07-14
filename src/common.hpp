@@ -11,6 +11,8 @@
 #include <chrono>
 #include <thread>
 
+#include <imgui.h>
+
 #include "logger/Logger.hpp"
 
 using namespace std::chrono_literals;
