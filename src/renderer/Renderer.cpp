@@ -80,8 +80,7 @@ void Renderer::_end_frame() const
 
 	ImGui_ImplDX11_RenderDrawData(ImGui::GetDrawData());
 
-	Backend::swap_chain()->Present(1, 0); // Present with vsync
-	//g_pSwapChain->Present(0, 0); // Present without vsync
+	Backend::swap_chain()->Present(1, 0);
 }
 
 bool Renderer::_win_message() const

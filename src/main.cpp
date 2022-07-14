@@ -29,6 +29,7 @@ int main()
 	Backend::destroy();
 	Window::destroy();
 
+	LOG(INFO) << "Farewell...";
 	Logger::destroy();
 
 	return 0;

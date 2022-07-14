@@ -6,6 +6,7 @@ using render_callback = std::function<void()>;
 class Renderer final
 {
 	std::map<std::uint32_t, render_callback> m_render_callbacks;
+
 	bool m_running = false;
 
 public:

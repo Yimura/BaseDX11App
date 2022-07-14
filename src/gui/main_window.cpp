@@ -8,8 +8,14 @@ void gui::main_window()
 	ImGui::SetNextWindowPos({ 0, 0 }, ImGuiCond_Always);
 
 	ImGui::Begin("##main_window", nullptr, ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoTitleBar);
+	{
+		ImGui::Text("Some Example Text");
 
+		if (ImGui::Button("Test Button"))
+		{
 
+		}
+	}
 
 	ImGui::End();
 }
