@@ -11,7 +11,7 @@
 #include <memory>
 #include <thread>
 
-#include <Logger.hpp>
+#include <AsyncLogger/Logger.hpp>
 
 #include "FileMgr/FileMgr.hpp"
 

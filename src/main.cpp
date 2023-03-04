@@ -10,7 +10,7 @@ int main()
 
     auto logger = LogHelper(
         FileMgr::GetProjectFile("./cout.log").Path());
-    LOG(DEBUG) << "File manager and Logger are ready to be used.";
+    LOG(VERBOSE) << "File manager and Logger are ready to be used.";
 
     return 0;
 }
