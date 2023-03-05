@@ -13,4 +13,5 @@ file(GLOB_RECURSE SRC_FILES
 add_executable(${PROJECT_NAME} ${SRC_FILES})
 target_precompile_headers(${PROJECT_NAME} PUBLIC "${PROJECT_SOURCE_DIR}/src/common.hpp")
 target_link_libraries(${PROJECT_NAME} AsyncLogger)
+target_link_libraries(${PROJECT_NAME} d3d11)
 target_include_directories(${PROJECT_NAME} PUBLIC "${PROJECT_SOURCE_DIR}/src/")

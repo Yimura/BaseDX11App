@@ -22,7 +22,7 @@ namespace dx11
         Backend& operator=(Backend&&) noexcept  = delete;
         
         static void Destroy();
-        static bool Init();
+        static bool Init(HWND window);
 
     private:
         static Backend& GetInstance()
@@ -33,7 +33,7 @@ namespace dx11
         }
 
         void DestroyImpl();
-        bool InitImpl();
+        bool InitImpl(HWND window);
 
     };
 }

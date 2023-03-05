@@ -16,9 +16,9 @@ namespace dx11
         GetInstance().DestroyImpl();
     }
 
-    bool Backend::Init()
+    bool Backend::Init(HWND window)
     {
-        return GetInstance().InitImpl();
+        return GetInstance().InitImpl(window);
     }
 
     void Backend::DestroyImpl()
@@ -49,7 +49,7 @@ namespace dx11
         m_Device = nullptr;
     }
 
-    bool Backend::InitImpl()
+    bool Backend::InitImpl(HWND window)
     {
         LOG(VERBOSE) << "Initialising DX11 backend";
 
@@ -74,7 +74,7 @@ namespace dx11
         desc.SampleDesc.Count = 1;
         desc.SampleDesc.Quality = 0;
         desc.SwapEffect = DXGI_SWAP_EFFECT_DISCARD;
-        desc.OutputWindow = nullptr;
+        desc.OutputWindow = window;
 
 #if defined(DEBUG) || defined(_DEBUG)
         constexpr std::uint32_t deviceFlags = D3D11_CREATE_DEVICE_DEBUG;
