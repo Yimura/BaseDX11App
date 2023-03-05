@@ -1,11 +1,15 @@
 #pragma once
+#include "Backend.hpp"
+#include "Window.hpp"
 
 namespace dx11
 {
     class Renderer
     {
     private:
-        /* data */
+        std::unique_ptr<Backend> m_Backend;
+        std::unique_ptr<Window> m_Window;
+
     public:
  
     };   

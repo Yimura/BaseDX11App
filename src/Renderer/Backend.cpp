@@ -13,16 +13,6 @@ namespace dx11
 
     void Backend::Destroy()
     {
-        GetInstance().DestroyImpl();
-    }
-
-    bool Backend::Init(HWND window)
-    {
-        return GetInstance().InitImpl(window);
-    }
-
-    void Backend::DestroyImpl()
-    {
         if (m_RenderTarget)
         {
             m_RenderTarget->Release();
@@ -49,7 +39,7 @@ namespace dx11
         m_Device = nullptr;
     }
 
-    bool Backend::InitImpl(HWND window)
+    bool Backend::Init(HWND window)
     {
         LOG(VERBOSE) << "Initialising DX11 backend";
 
