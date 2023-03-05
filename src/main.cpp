@@ -1,36 +1,30 @@
 #include "common.hpp"
+#include "GUI/GUI.hpp"
+#include "Logger/LogHelper.hpp"
+#include "Renderer/Renderer.hpp"
 
-#include "gui/gui.hpp"
-#include "logger/Logger.hpp"
-#include "renderer/Backend.hpp"
-#include "renderer/Renderer.hpp"
-#include "renderer/Window.hpp"
+using namespace al;
 
 int main()
 {
-	Logger::init("./cout.log");
+    using namespace dx11;
+    FileMgr::Init("./");
 
-	if (!Window::create_window(L"base_dx11_app", L"BaseDX11App"))
-		return 1;
-	if (!Backend::init())
-		return 1;
-	Window::show_window();
-	if (!Renderer::init())
-		return 1;
+    auto logger = LogHelper(
+        FileMgr::GetProjectFile("./cout.log").Path());
+    LOG(VERBOSE) << "File manager and Logger are ready to be used.";
 
-	Renderer::add_callback(gui::main_window, 9999);
+    if (!Renderer::Init())
+    {
+        LOG(FATAL) << "Failure while initialising Renderer!";
 
-	while (Renderer::loop())
-	{
-		
-	}
+        return 1;
+    }
+    Renderer::AddRenderCallback(GUI::MainWindow, 9999);
 
-	Renderer::destroy();
-	Backend::destroy();
-	Window::destroy();
+    while (g_Running && Renderer::Tick());
+    
+    Renderer::Destroy();
 
-	LOG(INFO) << "Farewell...";
-	Logger::destroy();
-
-	return 0;
+    return 0;
 }

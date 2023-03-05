@@ -3,16 +3,29 @@
 #include <Windows.h>
 #include <d3d11.h>
 
+#include <filesystem>
+#include <fstream>
+#include <iostream>
+
+#include <array>
+#include <format>
 #include <functional>
 #include <map>
-#include <memory>
+#include <string_view>
 #include <ranges>
 
-#include <chrono>
+#include <memory>
 #include <thread>
 
+#include <AsyncLogger/Logger.hpp>
 #include <imgui.h>
 
-#include "logger/Logger.hpp"
+#include "FileMgr/FileMgr.hpp"
 
-using namespace std::chrono_literals;
+namespace dx11
+{
+    using namespace std::chrono_literals;
+    using namespace al;
+
+    inline bool g_Running = true;
+}

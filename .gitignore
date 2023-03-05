@@ -1,12 +1,2 @@
-# compile output
-bin/
-
-# IDE
-.vs/
 .vscode/
-*.vcxproj*
-*.sln
-
-# Executable files
-*.log
-*.ini
+build/
