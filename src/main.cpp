@@ -1,4 +1,5 @@
 #include "common.hpp"
+#include "GUI/GUI.hpp"
 #include "Logger/LogHelper.hpp"
 #include "Renderer/Renderer.hpp"
 
@@ -19,11 +20,9 @@ int main()
 
         return 1;
     }
+    Renderer::AddRenderCallback(GUI::MainWindow, 9999);
 
-    while (g_Running)
-    {
-        g_Running = Renderer::Tick();
-    }
+    while (g_Running && Renderer::Tick());
     
     Renderer::Destroy();
 

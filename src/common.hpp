@@ -18,6 +18,7 @@
 #include <thread>
 
 #include <AsyncLogger/Logger.hpp>
+#include <imgui.h>
 
 #include "FileMgr/FileMgr.hpp"
 
