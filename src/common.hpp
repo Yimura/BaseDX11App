@@ -1,5 +1,8 @@
 #pragma once
 
+#include <Windows.h>
+#include <d3d11.h>
+
 #include <filesystem>
 #include <fstream>
 #include <iostream>
@@ -18,4 +21,5 @@
 namespace dx11
 {
     using namespace std::chrono_literals;
+    using namespace al;
 }
