@@ -29,8 +29,14 @@ namespace dx11
         { return m_DeviceContext; }
         IDXGISwapChain* GetSwapChain() const
         { return m_SwapChain; }
+        ID3D11RenderTargetView* GetRenderTarget() const
+        { return m_RenderTarget; }
+        
+        void CreateRenderTarget();
+        void ResetRenderTarget();
 
     private:
 
     };
 }
+extern LRESULT ImGui_ImplWin32_WndProcHandler(HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam);

@@ -9,7 +9,10 @@
 
 #include <array>
 #include <format>
+#include <functional>
+#include <map>
 #include <string_view>
+#include <ranges>
 
 #include <memory>
 #include <thread>
@@ -22,4 +25,6 @@ namespace dx11
 {
     using namespace std::chrono_literals;
     using namespace al;
+
+    inline bool g_Running = true;
 }

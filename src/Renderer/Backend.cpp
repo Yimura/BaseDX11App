@@ -13,10 +13,7 @@ namespace dx11
 
     void Backend::Destroy()
     {
-        if (m_RenderTarget)
-        {
-            m_RenderTarget->Release();
-        }
+        ResetRenderTarget();
 
         if (m_SwapChain)
         {
@@ -96,14 +93,27 @@ namespace dx11
 
         LOG(VERBOSE) << "Created D3D11 device with feature level : [" << featureLevel << "]";
 
-        ID3D11Texture2D* backBuffer;
-        m_SwapChain->GetBuffer(0, IID_PPV_ARGS(&backBuffer));
-        m_Device->CreateRenderTargetView(backBuffer, nullptr, &m_RenderTarget);
-        backBuffer->Release();
-
+        CreateRenderTarget();
         LOG(VERBOSE) << "Created back buffer";
         LOG(INFO) << "DX11 backend ready";
 
         return true;
+    }
+
+    void Backend::CreateRenderTarget()
+    {
+        ID3D11Texture2D* backBuffer;
+        m_SwapChain->GetBuffer(0, IID_PPV_ARGS(&backBuffer));
+        m_Device->CreateRenderTargetView(backBuffer, nullptr, &m_RenderTarget);
+        backBuffer->Release();
+    }
+
+    void Backend::ResetRenderTarget()
+    {
+        if (m_RenderTarget)
+        {
+            m_RenderTarget->Release();
+        }
+        m_RenderTarget = nullptr;
     }
 }
